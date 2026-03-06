@@ -2,9 +2,7 @@ import socket
 import hashlib
 import secrets
 from pathlib import Path
-
-HOST = "127.0.0.1"
-PORT = 12345
+from config import HOST, PORT, BLOCK_SIZE
 
 # Lire le message
 msg = Path("data/message.txt").read_text(encoding="utf-8")
@@ -30,6 +28,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     print(f" Paquet envoyé à {HOST}:{PORT}")
     
     # Attendre la réponse
-    data, _ = s.recvfrom(1024)
+    data, _ = s.recvfrom(BLOCK_SIZE)
     reponse = data.decode("utf-8")
     print(f"  Réponse du serveur : {reponse}")

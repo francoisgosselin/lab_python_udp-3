@@ -1,9 +1,7 @@
 import socket
 import hashlib
 from pathlib import Path
-
-HOST = "127.0.0.1"
-PORT = 12345
+from config import HOST, PORT, BLOCK_SIZE
 
 # Lire le message original
 msg = Path("data/message.txt").read_text(encoding="utf-8")
@@ -38,5 +36,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     print(f"\n Message CORROMPU envoyé ({len(msg_a_envoyer)} octets)")
     
     # Recevoir la réponse
-    data, _ = s.recvfrom(1024)
+    data, _ = s.recvfrom(BLOCK_SIZE)
     print(f"  Réponse du serveur : {data.decode('utf-8')}")

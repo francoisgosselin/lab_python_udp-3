@@ -1,8 +1,7 @@
 import socket
 import hashlib
+from config import HOST, PORT, BLOCK_SIZE
 
-HOST = "127.0.0.1"
-PORT = 12345
 used_nonces = set()
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
@@ -11,7 +10,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     print("En attente de paquets 'hash:nonce:message'...\n")
     
     while True:
-        data, addr = s.recvfrom(2048)
+        data, addr = s.recvfrom(BLOCK_SIZE)
         print(f" Reçu {len(data)} octets de {addr}")
         
         try:

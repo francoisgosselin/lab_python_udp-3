@@ -2,9 +2,7 @@ import socket
 import hashlib
 import secrets
 from pathlib import Path
-
-HOST = "127.0.0.1"
-PORT = 12345
+from config import HOST, PORT, BLOCk_SIZE
 
 # Lire le message
 msg = Path("data/message.txt").read_text(encoding="utf-8")
@@ -26,4 +24,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     
     print("\n🚀 Envoi 2/2 (ATTAQUE PAR REJEU !)...")
     s.sendto(paquet, (HOST, PORT))
-    print(f"↩️  Réponse : {s.recvfrom(1024)[0].decode('utf-8')}")
+    print(f"↩️  Réponse : {s.recvfrom(BLOCK_SIZE)[0].decode('utf-8')}")
